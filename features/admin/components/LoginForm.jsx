@@ -114,7 +114,7 @@ export default function LoginForm() {
         <div className="lg:col-span-7 bg-white p-6 sm:p-10 lg:p-12 flex flex-col justify-between">
           <div>
             
-            {/* Mobile Header with Logo + Language Dropdown */}
+            {/* Mobile Header with Logo */}
             <div className="lg:hidden flex items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-100">
               <Link href="/" className="inline-flex items-center gap-2 group min-w-0">
                 <div className="w-8 h-8 rounded-xl bg-[#0f766e] flex items-center justify-center text-white shadow-xs flex-shrink-0">
@@ -129,10 +129,6 @@ export default function LoginForm() {
                   </span>
                 </div>
               </Link>
-
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <LanguageDropdown />
-              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
