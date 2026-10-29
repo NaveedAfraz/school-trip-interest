@@ -1,2 +1,22 @@
-{}
-
+{
+  "b6a9e237-7976-42b5-860c-6ce2f6a909e4": {
+    "image_url": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+    "target_grades": "Grades 7 – 12",
+    "group_size": "15 – 45 Students",
+    "highlights": [
+      "Curriculum-linked learning objectives",
+      "Dedicated educational guides & safety officers",
+      "All-inclusive travel, accommodation, and meals"
+    ]
+  },
+  "test8": {
+    "image_url": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+    "target_grades": "Grades 7 – 12",
+    "group_size": "15 – 45 Students",
+    "highlights": [
+      "Curriculum-linked learning objectives",
+      "Dedicated educational guides & safety officers",
+      "All-inclusive travel, accommodation, and meals"
+    ]
+  }
+}

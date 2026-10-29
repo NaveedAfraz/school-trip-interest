@@ -180,13 +180,20 @@ export default function StatsCards({ stats = {}, tripSummaries = [], trips = [] 
                       </span>
                       <span className="text-xs text-slate-500 font-medium ml-1.5">students</span>
                     </div>
-                    <span className="text-xs font-extrabold text-slate-700 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-lg">
-                      {studentShare}% share
+                    <span
+                      className="text-xs font-extrabold text-slate-700 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded-lg"
+                      title={`${t.total_students} of ${stats.total_students} total students registered across all trips (${studentShare}%)`}
+                    >
+                      {studentShare}% of total demand
                     </span>
                   </div>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-100">
+                  <div className="flex items-center justify-between text-[10px] text-slate-400 font-bold mb-1.5">
+                    <span>Share of Total Student Demand</span>
+                    <span>{studentShare}% ({t.total_students}/{stats.total_students || 0})</span>
+                  </div>
                   <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                     <div
                       className={`h-full ${styling.accent} transition-all duration-700 rounded-full`}
