@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+:root {
+  /* ══════════════════════════════════════════════════════════════════════
+     MB LEARNING DESIGN SYSTEM TOKENS
+     Bespoke Academic Explorer Palette:
+     - Primary: Deep Forest Pine / Academic Spruce (#0f766e, #115e59)
+     - Accent: Warm Saffron Ochre / Explorer Amber (#d97706, #f59e0b)
+     - Dark Base: Midnight Spruce (#071e19, #0c2b24, #1a4239)
+     - Canvas: Warm Crisp Cream / Soft Slate (#f8faf9)
+     ══════════════════════════════════════════════════════════════════════ */
+
+  --brand-primary: #0f766e;
+  --brand-primary-hover: #115e59;
+  --brand-primary-active: #042f2e;
+  --brand-primary-light: #f0fdfa;
+  --brand-primary-subtle: #ccfbf1;
+
+  --brand-accent: #d97706;
+  --brand-accent-hover: #b45309;
+  --brand-accent-light: #fef3c7;
+  --brand-accent-subtle: #fffbeb;
+
+  --brand-dark: #071e19;
+  --brand-dark-surface: #0c2b24;
+  --brand-dark-card: #0f352c;
+  --brand-dark-border: #1a4239;
+
+  --canvas-bg: #f8faf9;
+  --text-main: #0f1c19;
+  --text-muted: #526661;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  background-color: var(--canvas-bg);
+  color: var(--text-main);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   GLOBAL REUSABLE UTILITIES & PALETTE CLASSES
+   Guaranteed direct rendering across any bundler / Turbopack
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── Primary Brand Classes ── */
+.bg-brand-primary {
+  background-color: #0f766e !important;
+  color: #ffffff !important;
+}
+.bg-brand-primary:hover {
+  background-color: #115e59 !important;
+}
+.bg-brand-primary:active {
+  background-color: #042f2e !important;
+}
+
+.text-brand-primary {
+  color: #0f766e !important;
+}
+
+.border-brand-primary {
+  border-color: #0f766e !important;
+}
+
+.bg-brand-light {
+  background-color: #f0fdfa !important;
+  color: #0f766e !important;
+}
+
+.border-brand-subtle {
+  border-color: #ccfbf1 !important;
+}
+
+/* ── Accent Classes ── */
+.bg-brand-accent {
+  background-color: #d97706 !important;
+  color: #ffffff !important;
+}
+.bg-brand-accent:hover {
+  background-color: #b45309 !important;
+}
+
+.text-brand-accent {
+  color: #d97706 !important;
+}
+
+.badge-brand {
+  background-color: #f0fdfa !important;
+  color: #0f766e !important;
+  border: 1px solid #ccfbf1 !important;
+}
+
+.badge-accent {
+  background-color: #fffbeb !important;
+  color: #b45309 !important;
+  border: 1px solid #fef3c7 !important;
+}
+
+/* ── Midnight Spruce Surfaces (Hero, Footer, Coordinator Suite) ── */
+.bg-dark-bg {
+  background-color: #071e19 !important;
+  color: #ffffff !important;
+}
+
+.bg-dark-surface {
+  background-color: #0c2b24 !important;
+  color: #ffffff !important;
+}
+
+.bg-dark-card {
+  background-color: #0f352c !important;
+  color: #ffffff !important;
+}
+
+.border-dark-border {
+  border-color: #1a4239 !important;
+}
+
+/* ── Accessibility Skip Link ── */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 1rem;
+  z-index: 100;
+  background: #0f766e;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 0;
+}
