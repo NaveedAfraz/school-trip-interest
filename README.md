@@ -18,7 +18,7 @@ npm install
 ```
 
 ### 3. Environment Variables
-Create a `.env.local` file in the root directory:
+Create a `.env.local` file in the root directory (or copy from `.env.example`):
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_your_key_here
