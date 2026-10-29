@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import Header from '@/features/common/Header';
 import Footer from '@/features/common/Footer';
 import TripCard from '@/features/trips/components/TripCard';
+import ExpeditionShowcase from '@/features/trips/components/ExpeditionShowcase';
 import InterestForm from '@/features/interest-form/components/InterestForm';
 import { useLanguage } from '@/lib/LanguageContext';
 import {
@@ -90,10 +91,10 @@ export default function LandingPage({ trips = [], currentUser = null }) {
       <Header currentUser={currentUser} />
 
       <main id="main-content" className="flex-1">
-        
+
         {/* 1. Hero Section with Background Video */}
         <section className="relative overflow-hidden bg-slate-950 text-white pt-20 pb-28 px-4 sm:px-6 lg:px-8">
-          
+
           <video
             autoPlay
             loop
@@ -153,38 +154,53 @@ export default function LandingPage({ trips = [], currentUser = null }) {
           </div>
         </section>
 
-        {/* 2. Sample Itineraries Section */}
-        <section id="trips" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[#0f766e] font-bold text-xs uppercase tracking-widest bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200">
-              {t('tripsBadge')}
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">
-              {t('tripsTitle')}
-            </h2>
-            <p className="text-slate-600 mt-3 text-sm sm:text-base leading-relaxed">
-              {t('tripsDesc')}
-            </p>
-          </div>
+        {/* 2. Expedition Showcase – desktop immersive dossier + mobile stack */}
+        <section id="trips" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20 bg-gradient-to-b from-slate-50 to-white">
+          <div className="max-w-7xl mx-auto">
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {trips.map((trip) => (
-              <TripCard
-                key={trip.id}
-                trip={trip}
-                isSelected={selectedTripId === trip.id}
+            {/* Section header */}
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <span className="text-[#0f766e] font-bold text-xs uppercase tracking-widest bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200">
+                Sample Programmes
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">
+                Curated Educational Expeditions
+              </h2>
+              <p className="text-slate-600 mt-3 text-sm sm:text-base leading-relaxed">
+                Immersive itineraries that merge curriculum depth with real-world exploration. Select a destination below to pre-fill your school registration.
+              </p>
+            </div>
+
+            {/* Desktop / tablet: immersive dossier showcase */}
+            <div className="hidden md:block">
+              <ExpeditionShowcase
+                trips={trips}
+                selectedTripId={selectedTripId}
                 onSelect={handleTripSelect}
               />
-            ))}
-          </div>
+            </div>
 
-          <div className="mt-12 text-center">
-            <p className="text-xs text-slate-500">
-              {t('tripsCustomNote')}{' '}
-              <a href="#register" className="text-[#0f766e] font-bold hover:underline">
-                {t('tripsCustomLink')}
-              </a>
-            </p>
+            {/* Mobile: horizontal boarding-pass card stack */}
+            <div className="md:hidden space-y-4">
+              {trips.map((trip) => (
+                <TripCard
+                  key={trip.id}
+                  trip={trip}
+                  isSelected={selectedTripId === trip.id}
+                  onSelect={handleTripSelect}
+                />
+              ))}
+            </div>
+
+            {/* Custom destination footnote */}
+            <div className="mt-10 text-center">
+              <p className="text-xs text-slate-500">
+                💡 Need a custom destination — Switzerland CERN, NASA Kennedy Space Center, or Japan Robotics?{' '}
+                <a href="#register" className="text-[#0f766e] font-bold hover:underline">
+                  Let us know in your interest registration.
+                </a>
+              </p>
+            </div>
           </div>
         </section>
 
@@ -258,7 +274,7 @@ export default function LandingPage({ trips = [], currentUser = null }) {
         >
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-              
+
               <div className="lg:col-span-5 space-y-8">
                 <div>
                   <span className="text-[#0f766e] font-bold text-xs uppercase tracking-widest bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200">
