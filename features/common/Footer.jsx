@@ -1,9 +1,11 @@
 'use client';
 
 import { GraduationCap, MapPin, Mail, Heart } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="bg-[#071e19] text-slate-300 border-t border-[#1a4239]">
@@ -15,16 +17,15 @@ export default function Footer() {
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-900 via-teal-800 to-emerald-700 flex items-center justify-center text-white shadow-md shadow-teal-950/40">
                 <GraduationCap className="w-5 h-5 text-emerald-200" />
               </div>
-              <span className="text-white">MB Learning</span>
+              <span className="text-white">{t('brandName')}</span>
             </div>
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm mb-5">
-              Empowering schools with immersive educational journeys. We bridge classroom
-              curriculums with experiential learning across STEM, cultural heritage, and world-class universities.
+              {t('footerDesc')}
             </p>
             <div className="space-y-2 text-xs text-slate-300">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>Founders' Office, Gachibowli, Hyderabad, Telangana</span>
+                <span>{t('advisoryAddress')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
@@ -34,7 +35,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-white font-bold text-xs uppercase tracking-wider mb-4">Sample Programmes</p>
+            <p className="text-white font-bold text-xs uppercase tracking-wider mb-4">{t('footerSampleTrips')}</p>
             <ul className="text-xs space-y-2.5">
               <li>
                 <a href="#trips" className="text-slate-300 hover:text-amber-300 transition-colors">
@@ -60,18 +61,18 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-white font-bold text-xs uppercase tracking-wider mb-4">Standards & Safety</p>
+            <p className="text-white font-bold text-xs uppercase tracking-wider mb-4">{t('footerResources')}</p>
             <ul className="text-xs space-y-2 text-slate-300">
-              <li>✓ Comprehensive Travel Insurance</li>
-              <li>✓ 1:10 Teacher-to-Student Ratios</li>
-              <li>✓ 24/7 Ground Medical Coordination</li>
-              <li>✓ Vetted Transportation & Stays</li>
-              <li>✓ Emergency Response Protocols</li>
+              <li>✓ {t('footerSafety')}</li>
+              <li>✓ {t('footerCurriculum')}</li>
+              <li>✓ 1:10 Teacher Ratio</li>
+              <li>✓ 24/7 Medical Coordination</li>
+              <li>✓ {t('footerPrivacy')}</li>
             </ul>
           </div>
 
           <div>
-            <p className="text-white font-bold text-xs uppercase tracking-wider mb-4">Coordinator Support</p>
+            <p className="text-white font-bold text-xs uppercase tracking-wider mb-4">{t('advisoryBadge')}</p>
             <p className="text-xs text-slate-300 leading-relaxed">
               Dedicated tour managers and ground support for participating educational institutions and school coordinators.
             </p>
@@ -80,7 +81,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-[#1a4239] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 text-center sm:text-left">
           <p className="leading-relaxed">
-            © {year} MB Learning Technologies Pvt. Ltd. All sample trip itineraries are illustrative.
+            © {year} {t('footerRights')}
           </p>
           <p className="leading-relaxed text-center sm:text-right">
             Built for MB Learning Practical Assessment with{' '}

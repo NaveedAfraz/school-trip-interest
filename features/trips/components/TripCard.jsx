@@ -1,8 +1,10 @@
 'use client';
 
 import { MapPin, Clock, ArrowRight, CheckCircle2, GraduationCap, Users } from 'lucide-react';
+import { useLanguage } from '@/lib/LanguageContext';
 
 export default function TripCard({ trip, isSelected = false, onSelect }) {
+  const { t } = useLanguage();
   const highlights = trip.highlights || [
     'Curriculum-linked learning objectives',
     'Dedicated educational guides & safety officers',
@@ -102,11 +104,11 @@ export default function TripCard({ trip, isSelected = false, onSelect }) {
             {isSelected ? (
               <>
                 <CheckCircle2 className="w-4 h-4 text-white" />
-                <span>Selected for Registration</span>
+                <span>{t('tripSelectedBtn')}</span>
               </>
             ) : (
               <>
-                <span>Select & Register Interest</span>
+                <span>{t('tripSelectBtn')}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </>
             )}

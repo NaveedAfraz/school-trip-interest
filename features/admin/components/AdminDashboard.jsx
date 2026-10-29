@@ -70,11 +70,19 @@ export default function AdminDashboard({
   const stats = computeStats(allSubmissions);
   const tripSummaries = computeTripSummaries(trips, allSubmissions);
 
-  // Map counts per trip for filter pills & stats
+  // Map counts and student totals per trip for filter pills & stats
   const submissionCounts = {};
+  const studentCounts = {};
   allSubmissions.forEach((s) => {
-    submissionCounts[s.trip_id] = (submissionCounts[s.trip_id] || 0) + 1;
+    const tripId = s.trip_id;
+    const count = Number(s.number_of_students) || 0;
+    submissionCounts[tripId] = (submissionCounts[tripId] || 0) + 1;
+    studentCounts[tripId] = (studentCounts[tripId] || 0) + count;
   });
+  const totalStudentsOverall = allSubmissions.reduce(
+    (sum, s) => sum + (Number(s.number_of_students) || 0),
+    0
+  );
 
   const selectedTripObj = trips.find((t) => t.id === filterTripId);
 
@@ -224,25 +232,37 @@ export default function AdminDashboard({
               </div>
 
               <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
-                <div className="p-5 sm:p-6 border-b border-slate-100 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                {/* 1. Header Row: Fixed & Stable Title (Will NEVER move or jump when filters change) */}
+                <div className="p-5 sm:p-6 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-base font-extrabold text-slate-900">
+                    <h2 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
                       All Submissions
                     </h2>
                     <p className="text-xs text-slate-500 mt-0.5">
                       Real-time submissions with direct database persistence.
                     </p>
                   </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200/60 shadow-2xs">
+                      {filtered.length} of {allSubmissions.length} inquiries
+                    </span>
+                  </div>
+                </div>
 
+                {/* 2. Filter Bar: Full-width dedicated section strictly separated from the title */}
+                <div className="px-5 py-4 sm:px-6 bg-slate-50/70 border-b border-slate-100">
                   <TripFilter
                     trips={trips}
                     selectedTripId={filterTripId}
                     onChange={setFilterTripId}
                     submissionCounts={submissionCounts}
+                    studentCounts={studentCounts}
                     totalCount={allSubmissions.length}
+                    totalStudentsOverall={totalStudentsOverall}
                   />
                 </div>
 
+                {/* 3. Submissions Table */}
                 <div className="p-4 sm:p-6">
                   <SubmissionsTable
                     submissions={filtered}

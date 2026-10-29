@@ -1,5 +1,6 @@
 import { Geist } from 'next/font/google';
 import './globals.css';
+import { LanguageProvider } from '@/lib/LanguageContext';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist-sans' });
 
@@ -16,9 +17,10 @@ export default function RootLayout({ children }) {
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
 }
-

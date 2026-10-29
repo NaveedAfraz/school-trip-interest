@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { submitInterest } from '@/features/interest-form/actions/submitInterest';
 import { validateInterestForm } from '@/lib/validations';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const EMPTY_FORM = {
   teacher_name: '',
@@ -47,6 +48,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
   const [result, setResult] = useState(null);
   const [isPending, startTransition] = useTransition();
   const formRef = useRef(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (selectedTripId) {
@@ -97,7 +99,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
   const isLargeDelegation = !isNaN(studentCount) && studentCount > maxCohortSize;
 
   const inputClass = (field) =>
-    `w-full rounded-xl border pl-11 pr-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 bg-slate-50/50 hover:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all shadow-2xs ${
+    `w-full rounded-xl border pl-11 pr-4 py-3.5 text-sm text-slate-900 placeholder-slate-400 bg-slate-50/50 hover:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0f766e] focus:border-transparent transition-all shadow-2xs ${
       errors[field]
         ? 'border-red-400 bg-red-50/40 focus:ring-red-500'
         : 'border-slate-200 hover:border-slate-300'
@@ -106,7 +108,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
   return (
     <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl p-7 sm:p-10 relative overflow-hidden">
       
-      <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-teal-900 via-brand-primary to-amber-500" />
+      <div className="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-teal-900 via-[#0f766e] to-amber-500" />
 
       {result && result.success ? (
         <div className="py-8 text-center space-y-5">
@@ -120,7 +122,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
               <span>Inquiry Confirmed</span>
             </span>
             <h3 className="text-2xl font-extrabold text-slate-900">
-              Interest Registered Successfully!
+              {t('formSuccessTitle')}
             </h3>
             <p className="text-sm text-slate-600 mt-2 leading-relaxed">
               {result.message}
@@ -128,10 +130,10 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
           </div>
 
           <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 max-w-md mx-auto text-left text-xs text-slate-700 space-y-2">
-            <p className="font-bold text-slate-900">Next Steps for Your School:</p>
-            <p>1. Our academic travel advisor will review your student cohort requirements.</p>
-            <p>2. You will receive a customized itinerary deck & safety pack within 3–5 working days.</p>
-            <p>3. We will schedule a brief video consultation with your school leadership.</p>
+            <p className="font-bold text-slate-900">{t('formSuccessNextTitle')}</p>
+            <p>{t('formSuccessNext1')}</p>
+            <p>{t('formSuccessNext2')}</p>
+            <p>{t('formSuccessNext3')}</p>
           </div>
 
           <button
@@ -140,7 +142,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
             className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-6 py-3 rounded-xl transition-all shadow-sm cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>Submit Another Registration</span>
+            <span>{t('formAnotherBtn')}</span>
           </button>
         </div>
       ) : (
@@ -148,28 +150,28 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
           
           <div className="mb-7">
             <div className="flex items-center justify-between gap-3 mb-2">
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-primary bg-brand-light px-3 py-1 rounded-full border border-brand-subtle">
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#0f766e] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
                 <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                <span>No Booking Obligation</span>
+                <span>{t('formNoObligation')}</span>
               </span>
-              <span className="text-xs text-slate-400 font-medium">Step 1 of 2</span>
+              <span className="text-xs text-slate-400 font-medium">{t('formStep')}</span>
             </div>
             <h3 className="text-2xl font-extrabold text-slate-900">
-              Register Your School's Interest
+              {t('formHeader')}
             </h3>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Provide your details and estimated student numbers. Our team in Gachibowli will prepare a detailed proposal.
+              {t('formSub')}
             </p>
           </div>
 
           {selectedTripObj && (
             <div className="mb-7 p-4 rounded-2xl bg-gradient-to-r from-teal-50/80 to-emerald-50/50 border border-teal-200/80 flex items-center justify-between gap-3 shadow-2xs">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-teal-900/20">
+                <div className="w-10 h-10 rounded-xl bg-[#0f766e] text-white flex items-center justify-center flex-shrink-0 shadow-sm shadow-teal-900/20">
                   <Compass className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[11px] text-brand-primary font-bold uppercase tracking-wider">
+                  <p className="text-[11px] text-[#0f766e] font-bold uppercase tracking-wider">
                     Selected Itinerary
                   </p>
                   <p className="text-sm font-bold text-slate-900">
@@ -180,7 +182,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                   </p>
                 </div>
               </div>
-              <span className="text-xs font-bold text-brand-primary bg-white px-3 py-1 rounded-full border border-brand-subtle shadow-2xs flex-shrink-0">
+              <span className="text-xs font-bold text-[#0f766e] bg-white px-3 py-1 rounded-full border border-emerald-200 shadow-2xs flex-shrink-0">
                 {selectedTripObj.duration || 'Flexible'}
               </span>
             </div>
@@ -204,7 +206,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                   htmlFor="teacher_name"
                   className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2"
                 >
-                  Teacher / Coordinator Name <span className="text-red-500">*</span>
+                  {t('formLabelTeacher')}
                 </label>
                 <div className="relative">
                   <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-4" />
@@ -215,7 +217,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                     required
                     value={values.teacher_name}
                     onChange={handleChange}
-                    placeholder="e.g. Dr. Rajesh Sharma"
+                    placeholder={t('formPlaceholderTeacher')}
                     className={inputClass('teacher_name')}
                   />
                 </div>
@@ -229,7 +231,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                   htmlFor="school_name"
                   className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2"
                 >
-                  School / Institution Name <span className="text-red-500">*</span>
+                  {t('formLabelSchool')}
                 </label>
                 <div className="relative">
                   <Building className="w-4 h-4 text-slate-400 absolute left-3.5 top-4" />
@@ -240,7 +242,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                     required
                     value={values.school_name}
                     onChange={handleChange}
-                    placeholder="e.g. Oakridge International School"
+                    placeholder={t('formPlaceholderSchool')}
                     className={inputClass('school_name')}
                   />
                 </div>
@@ -254,7 +256,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                   htmlFor="email"
                   className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2"
                 >
-                  Official School Email <span className="text-red-500">*</span>
+                  {t('formLabelEmail')}
                 </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-4" />
@@ -265,7 +267,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                     required
                     value={values.email}
                     onChange={handleChange}
-                    placeholder="teacher@school.edu"
+                    placeholder={t('formPlaceholderEmail')}
                     className={inputClass('email')}
                   />
                 </div>
@@ -279,7 +281,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                   htmlFor="phone"
                   className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2"
                 >
-                  Contact Phone Number <span className="text-red-500">*</span>
+                  {t('formLabelPhone')}
                 </label>
                 <div className="relative">
                   <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-4" />
@@ -290,7 +292,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                     required
                     value={values.phone}
                     onChange={handleChange}
-                    placeholder="+91 98765 43210"
+                    placeholder={t('formPlaceholderPhone')}
                     className={inputClass('phone')}
                   />
                 </div>
@@ -304,10 +306,10 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                   htmlFor="trip_id"
                   className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2"
                 >
-                  Selected Trip Itinerary <span className="text-red-500">*</span>
+                  {t('formLabelTrip')}
                 </label>
                 <div className="relative">
-                  <Compass className="w-4 h-4 text-slate-400 absolute left-3.5 top-4" />
+                  <Compass className="w-4 h-4 text-slate-400 absolute left-3.5 top-4 pointer-events-none" />
                   <select
                     id="trip_id"
                     name="trip_id"
@@ -316,7 +318,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                     onChange={handleChange}
                     className={inputClass('trip_id')}
                   >
-                    <option value="">— Select an educational itinerary —</option>
+                    <option value="">— {t('formPlaceholderTrip')} —</option>
                     {trips.map((t) => (
                       <option key={t.id} value={t.id}>
                         {t.name} ({t.destination})
@@ -334,7 +336,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                   htmlFor="number_of_students"
                   className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2"
                 >
-                  Estimated Students (1–500) <span className="text-red-500">*</span>
+                  {t('formLabelStudents')}
                 </label>
                 <div className="relative">
                   <Users className="w-4 h-4 text-slate-400 absolute left-3.5 top-4" />
@@ -347,7 +349,7 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                     max={500}
                     value={values.number_of_students}
                     onChange={handleChange}
-                    placeholder="e.g. 35"
+                    placeholder={t('formPlaceholderStudents')}
                     className={inputClass('number_of_students')}
                   />
                 </div>
@@ -386,11 +388,11 @@ export default function InterestForm({ trips = [], selectedTripId = '' }) {
                 {isPending ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin text-amber-300" />
-                    <span className="text-white font-bold">Transmitting Interest...</span>
+                    <span className="text-white font-bold">{t('formSubmitting')}</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-white font-bold">Submit School Interest</span>
+                    <span className="text-white font-bold">{t('formSubmitBtn')}</span>
                     <Send className="w-4 h-4 text-amber-300" />
                   </>
                 )}
