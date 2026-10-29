@@ -22,33 +22,42 @@ export default function LanguageDropdown({ variant = 'default', className = '' }
 
   const current = languages.find((l) => l.code === lang) || languages[0];
 
-  const buttonStyle =
-    variant === 'dark'
-      ? 'bg-white/10 hover:bg-white/20 text-white border-white/20'
-      : 'bg-slate-100 hover:bg-slate-200/80 active:bg-slate-200 text-slate-700 border-slate-200/80';
+  const isDark = variant === 'dark';
+
+  const buttonStyle = isDark
+    ? 'bg-[#0c2b24]/90 hover:bg-[#1a4239] text-white border-white/25 shadow-md shadow-black/20'
+    : 'bg-slate-100 hover:bg-slate-200/80 active:bg-slate-200 text-slate-800 border-slate-200/80 shadow-2xs';
 
   return (
     <div className={`relative inline-block ${className}`} ref={dropdownRef}>
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 rounded-xl text-xs font-bold transition-all border shadow-2xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0f766e]/30 flex-shrink-0 ${buttonStyle}`}
+        className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0f766e]/40 flex-shrink-0 ${buttonStyle}`}
         aria-label="Change Language"
         aria-expanded={isOpen}
       >
-        <Globe className="w-3.5 h-3.5 text-[#0f766e] flex-shrink-0" />
-        <span className="font-black text-xs uppercase text-slate-800">{current?.code}</span>
-        <ChevronDown
-          className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${
-            isOpen ? 'rotate-180 text-[#0f766e]' : ''
+        <Globe
+          className={`w-3.5 h-3.5 flex-shrink-0 ${isDark ? 'text-emerald-300' : 'text-[#0f766e]'}`}
+        />
+        <span
+          className={`font-black text-xs uppercase tracking-wider ${
+            isDark ? 'text-white' : 'text-slate-900'
           }`}
+        >
+          {current?.code}
+        </span>
+        <ChevronDown
+          className={`w-3 h-3 transition-transform duration-200 ${
+            isDark ? 'text-emerald-200/80' : 'text-slate-400'
+          } ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-44 bg-white rounded-2xl shadow-xl border border-slate-200/90 py-1.5 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+        <div className="absolute right-0 mt-2 w-44 bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-1.5 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
           <div className="px-3.5 py-1.5 border-b border-slate-100 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Select Language
+            Language / भाषा
           </div>
           {languages.map((l) => {
             const isCurrent = l.code === lang;

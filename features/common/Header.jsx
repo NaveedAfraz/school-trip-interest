@@ -121,16 +121,16 @@ export default function Header({ currentUser = null }) {
                 {t('navSampleTrips')}
               </a>
               <a
-                href="#why-us"
-                className="text-xs lg:text-sm font-semibold text-slate-600 hover:text-[#0f766e] px-2.5 py-2 rounded-xl hover:bg-slate-50 transition-colors"
-              >
-                {t('navWhyUs')}
-              </a>
-              <a
                 href="#how-it-works"
                 className="text-xs lg:text-sm font-semibold text-slate-600 hover:text-[#0f766e] px-2.5 py-2 rounded-xl hover:bg-slate-50 transition-colors"
               >
                 {t('navHowItWorks')}
+              </a>
+              <a
+                href="#why-us"
+                className="text-xs lg:text-sm font-semibold text-slate-600 hover:text-[#0f766e] px-2.5 py-2 rounded-xl hover:bg-slate-50 transition-colors"
+              >
+                {t('navWhyUs')}
               </a>
 
               <LanguageDropdown />
@@ -188,19 +188,27 @@ export default function Header({ currentUser = null }) {
         </div>
       </header>
 
-      {/* Mobile Sidebar / Drawer Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden animate-in fade-in duration-200">
-          
-          {/* Dark Backdrop */}
-          <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
-            onClick={closeMobileMenu}
-            aria-hidden="true"
-          />
+      {/* Mobile Sidebar / Drawer with smooth slide-in and slide-out animation */}
+      <div
+        className={`fixed inset-0 z-50 md:hidden transition-all duration-300 ${
+          isMobileMenuOpen ? 'pointer-events-auto visible' : 'pointer-events-none invisible delay-300'
+        }`}
+      >
+        {/* Dark Backdrop with fade in/out */}
+        <div
+          className={`fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-300 ease-in-out ${
+            isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />
 
-          {/* Drawer Panel */}
-          <div className="fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-2xl flex flex-col justify-between z-10 animate-in slide-in-from-right duration-250">
+        {/* Sliding Drawer Panel */}
+        <div
+          className={`fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-2xl flex flex-col justify-between z-10 transition-transform duration-300 ease-in-out transform ${
+            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
             
             {/* Drawer Header */}
             <div>
@@ -241,21 +249,21 @@ export default function Header({ currentUser = null }) {
                 </a>
 
                 <a
-                  href="#why-us"
-                  onClick={closeMobileMenu}
-                  className="flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-bold text-slate-700 hover:text-[#0f766e] hover:bg-teal-50/70 transition-colors"
-                >
-                  <BookOpen className="w-4 h-4 text-[#0f766e]" />
-                  <span>{t('navWhyUs')}</span>
-                </a>
-
-                <a
                   href="#how-it-works"
                   onClick={closeMobileMenu}
                   className="flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-bold text-slate-700 hover:text-[#0f766e] hover:bg-teal-50/70 transition-colors"
                 >
                   <HelpCircle className="w-4 h-4 text-[#0f766e]" />
                   <span>{t('navHowItWorks')}</span>
+                </a>
+
+                <a
+                  href="#why-us"
+                  onClick={closeMobileMenu}
+                  className="flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-bold text-slate-700 hover:text-[#0f766e] hover:bg-teal-50/70 transition-colors"
+                >
+                  <BookOpen className="w-4 h-4 text-[#0f766e]" />
+                  <span>{t('navWhyUs')}</span>
                 </a>
               </div>
 
@@ -329,7 +337,6 @@ export default function Header({ currentUser = null }) {
             </div>
           </div>
         </div>
-      )}
     </>
   );
 }
